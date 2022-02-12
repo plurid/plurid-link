@@ -18,6 +18,12 @@ describe('Analysis:', () => {
         });
 
         pluridLink.new({
+            target: 'https://link',
+            value: 'someValue',
+            namespace: 'someNamespace',
+        });
+
+        pluridLink.new({
             type: 'service',
             service: 'someApp',
             action: 'someAction',
@@ -25,6 +31,19 @@ describe('Analysis:', () => {
                 some: 'data',
             },
         });
+
+
+        pluridLink.remove(
+            'id',
+        );
+
+        pluridLink.remove(
+            '/someNamespace/someValue',
+        );
+
+        pluridLink.remove(
+            'someApp://someAction?some=data',
+        );
     });
 });
 // #endregion module
