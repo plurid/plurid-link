@@ -36,6 +36,21 @@ class PluridLink {
     }
 
 
+    /**
+     * Generate a new `http` or `service` link.
+     *
+     * @param options
+     * @returns
+     */
+    public async new(
+        target: string,
+    ): Promise<Response>;
+    public async new(
+        httpOptions: NewHTTPLinkOptions,
+    ): Promise<Response>;
+    public async new(
+        serviceOptions: NewServiceLinkOptions,
+    ): Promise<Response>;
     public async new(
         options: string | NewOptions,
     ): Promise<Response> {
@@ -96,13 +111,18 @@ class PluridLink {
         }
     }
 
-
+    /**
+     * Remove a plurid.link by `id` or `path`.
+     *
+     * @param value
+     * @returns
+     */
     public async remove(
-        id: string,
+        value: string,
     ) {
         try {
             const input = {
-                id,
+                value,
             };
 
             const request = await this.api.mutate({
@@ -121,7 +141,7 @@ class PluridLink {
 
             return {
                 status: true,
-                data: id,
+                data: response.data,
             };
         } catch (error) {
             return {
