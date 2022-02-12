@@ -76,9 +76,11 @@ class PluridLink {
             }
 
 
-            const input = JSON.stringify({
-                ...resolvedOptions,
-            });
+            const input = {
+                value: JSON.stringify({
+                    ...resolvedOptions,
+                }),
+            };
 
             const request = await this.api.mutate({
                 mutation: NEW_LINK,
