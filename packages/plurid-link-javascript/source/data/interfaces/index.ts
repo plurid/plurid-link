@@ -22,6 +22,9 @@ export type NewOptions =
 export interface NewHTTPLinkOptions {
     type?: 'http';
     target: string;
+    value?: string;
+    namespace?: string;
+    expiration?: '24_HOURS' | '30_DAYS';
 }
 
 export interface NewServiceLinkOptions {
