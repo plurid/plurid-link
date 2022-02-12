@@ -42,15 +42,9 @@ class PluridLink {
      * @param options
      * @returns
      */
-    public async new(
-        target: string,
-    ): Promise<Response>;
-    public async new(
-        httpOptions: NewHTTPLinkOptions,
-    ): Promise<Response>;
-    public async new(
-        serviceOptions: NewServiceLinkOptions,
-    ): Promise<Response>;
+    public async new(target: string): Promise<Response>;
+    public async new(httpOptions: NewHTTPLinkOptions): Promise<Response>;
+    public async new(serviceOptions: NewServiceLinkOptions): Promise<Response>;
     public async new(
         options: string | NewOptions,
     ): Promise<Response> {
