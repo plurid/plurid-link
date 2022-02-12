@@ -35,11 +35,44 @@ class PluridLink {
 
 
     public async new(
-        options: NewOptions,
+        options: string | NewOptions,
     ): Promise<Response> {
         try {
+            const type = typeof options === 'string'
+                ? 'http'
+                : options.type || 'http';
+
+            let resolvedOptions = {
+            };
+            switch (type) {
+                case 'http': {
+                    const target = typeof options === 'string'
+                        ? options
+                        : '';
+                    const restOptions = typeof options === 'string' ? {} : options;
+                    resolvedOptions = {
+                        type,
+                        target,
+                        ...restOptions,
+                    };
+                    break;
+                }
+                case 'service': {
+                    if (typeof options === 'string') {
+                        return {
+                            status: false,
+                        };
+                    }
+                    resolvedOptions = {
+                        ...options,
+                    };
+                    break;
+                }
+            }
+
+
             const input = {
-                ...options,
+                ...resolvedOptions,
             };
 
             const request = await this.api.mutate({

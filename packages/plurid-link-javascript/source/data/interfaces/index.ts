@@ -14,7 +14,20 @@ export interface ResponseSuccess {
 };
 
 
-export interface NewOptions {
 
+export type NewOptions =
+    | NewHTTPLinkOptions
+    | NewServiceLinkOptions;
+
+export interface NewHTTPLinkOptions {
+    type?: 'http';
+    target: string;
+}
+
+export interface NewServiceLinkOptions {
+    type: 'service';
+    service: string;
+    action: string;
+    data?: Record<string, any>;
 }
 // #endregion module
