@@ -10,8 +10,8 @@
 
 // #region module
 export const NEW_LINK = gql`
-    mutation pluridLinkNewLink($input: InputPluridLinkNewLink!) {
-        pluridLinkNewLink(input: $input) {
+    mutation PluridLinkClientNewLink($input: InputPluridLinkClientNewLink!) {
+        pluridLinkClientNewLink(input: $input) {
             status
         }
     }
@@ -19,8 +19,8 @@ export const NEW_LINK = gql`
 
 
 export const REMOVE_LINK = gql`
-    mutation pluridLinkRemoveLink($input: InputPluridLinkRemoveLink!) {
-        pluridLinkRemoveLink(input: $input) {
+    mutation PluridLinkClientRemoveLink($input: InputPluridLinkClientRemoveLink!) {
+        pluridLinkClientRemoveLink(input: $input) {
             status
         }
     }

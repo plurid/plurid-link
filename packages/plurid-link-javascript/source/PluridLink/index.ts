@@ -2,6 +2,8 @@
     // #region external
     import {
         NewOptions,
+        NewHTTPLinkOptions,
+        NewServiceLinkOptions,
         Response,
     } from '~data/interfaces';
 
@@ -42,13 +44,12 @@ class PluridLink {
                 ? 'http'
                 : options.type || 'http';
 
-            let resolvedOptions = {
-            };
+            let resolvedOptions: NewOptions | {} = {};
             switch (type) {
                 case 'http': {
                     const target = typeof options === 'string'
                         ? options
-                        : '';
+                        : (options as NewHTTPLinkOptions).target;
                     const restOptions = typeof options === 'string' ? {} : options;
                     resolvedOptions = {
                         type,
@@ -58,22 +59,17 @@ class PluridLink {
                     break;
                 }
                 case 'service': {
-                    if (typeof options === 'string') {
-                        return {
-                            status: false,
-                        };
-                    }
                     resolvedOptions = {
-                        ...options,
+                        ...options as NewServiceLinkOptions,
                     };
                     break;
                 }
             }
 
 
-            const input = {
+            const input = JSON.stringify({
                 ...resolvedOptions,
-            };
+            });
 
             const request = await this.api.mutate({
                 mutation: NEW_LINK,
@@ -82,7 +78,7 @@ class PluridLink {
                 },
             });
 
-            const response = request.data.pluridLinkNewLink;
+            const response = request.data.pluridLinkClientNewLink;
             if (!response.status) {
                 return {
                     status: false,
@@ -116,7 +112,7 @@ class PluridLink {
                 },
             });
 
-            const response = request.data.pluridLinkNewLink;
+            const response = request.data.pluridLinkClientRemoveLink;
             if (!response.status) {
                 return {
                     status: false,
