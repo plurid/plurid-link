@@ -21,6 +21,7 @@ export type NewOptions =
 
 export interface NewHTTPLinkOptions {
     type?: 'http';
+    link?: string;
     target: string;
     value?: string;
     namespace?: string;
