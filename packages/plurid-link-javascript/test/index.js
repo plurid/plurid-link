@@ -1,3 +1,5 @@
+process.env.PLURID_LINK_API_ENDPOINT = 'http://localhost:33300/graphql';
+
 const PluridLink = require('../distribution').default;
 
 
