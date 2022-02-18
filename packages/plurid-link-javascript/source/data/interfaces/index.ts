@@ -23,6 +23,10 @@ export type LinkExpiration =
     | '24_HOURS' | '30_DAYS'
     | number;
 
+export type LinkType =
+    | 'http'
+    | 'service';
+
 export interface LinkOptionsBase {
     value?: string;
     namespace?: string;
@@ -35,7 +39,7 @@ export interface NewHTTPLinkOptions extends LinkOptionsBase {
 }
 
 export interface NewServiceLinkOptions extends LinkOptionsBase {
-    type: 'service';
+    type?: 'service';
     service: string;
     action: string;
     data?: Record<string, any>;

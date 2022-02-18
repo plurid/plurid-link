@@ -4,6 +4,7 @@
         NewOptions,
         NewHTTPLinkOptions,
         NewServiceLinkOptions,
+        LinkType,
         Response,
     } from '~data/interfaces';
 
@@ -49,9 +50,11 @@ class PluridLink {
         options: string | NewOptions,
     ): Promise<Response> {
         try {
-            const type = typeof options === 'string'
+            const type: LinkType = typeof options === 'string'
                 ? 'http'
-                : options.type || 'http';
+                : typeof (options as NewHTTPLinkOptions).target === 'string'
+                    ? 'http'
+                    : 'service';
 
             let resolvedOptions: NewOptions | {} = {};
             switch (type) {
@@ -61,15 +64,16 @@ class PluridLink {
                         : (options as NewHTTPLinkOptions).target;
                     const restOptions = typeof options === 'string' ? {} : options;
                     resolvedOptions = {
+                        ...restOptions,
                         type,
                         target,
-                        ...restOptions,
                     };
                     break;
                 }
                 case 'service': {
                     resolvedOptions = {
                         ...options as NewServiceLinkOptions,
+                        type: 'service',
                     };
                     break;
                 }
