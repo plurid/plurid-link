@@ -19,16 +19,22 @@ export type NewOptions =
     | NewHTTPLinkOptions
     | NewServiceLinkOptions;
 
-export interface NewHTTPLinkOptions {
-    type?: 'http';
-    link?: string;
-    target: string;
+export type LinkExpiration =
+    | '24_HOURS' | '30_DAYS'
+    | number;
+
+export interface LinkOptionsBase {
     value?: string;
     namespace?: string;
-    expiration?: '24_HOURS' | '30_DAYS';
+    expiration?: LinkExpiration;
 }
 
-export interface NewServiceLinkOptions {
+export interface NewHTTPLinkOptions extends LinkOptionsBase {
+    type?: 'http';
+    target: string;
+}
+
+export interface NewServiceLinkOptions extends LinkOptionsBase {
     type: 'service';
     service: string;
     action: string;
