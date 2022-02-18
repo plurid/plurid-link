@@ -14,7 +14,7 @@ const main = async () => {
     //     service: 'skype',
     //     action: 'user',
     //     data: {
-    //         chat: '',
+    //         chat: true,
     //     },
     // });
     const response = await pluridLink.new({
